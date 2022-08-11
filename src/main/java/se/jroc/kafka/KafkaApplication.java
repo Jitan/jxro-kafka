@@ -1,4 +1,4 @@
-package se.jroc.jxrokafka;
+package se.jroc.kafka;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,18 +9,19 @@ import org.springframework.kafka.core.KafkaTemplate;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
-public class JxroKafkaApplication {
+public class KafkaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JxroKafkaApplication.class, args);
+        SpringApplication.run(KafkaApplication.class, args);
     }
 
     @Bean
     CommandLineRunner commandLineRunner(KafkaTemplate<String, Message> kafkaTemplate) {
         return args -> {
-            for (int i = 0; i < 99; i++) {
+            for (int i = 0; i < 2; i++) {
                 kafkaTemplate.send("jxro",
-                        new Message("Hello World " + i, LocalDateTime.now()));
+                        new Message("Hello World " + i,
+                                LocalDateTime.now()));
             }
 
         };
